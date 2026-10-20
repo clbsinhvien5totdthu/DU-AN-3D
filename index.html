@@ -28,7 +28,7 @@
     <p class="to" id="to"></p>
     <h1>Chúc mừng ngày<br>Phụ nữ Việt Nam</h1>
     <span class="date">20/10</span>
-    <p class="code">// hôm nay không có deadline, chỉ có hoa</p>
+    <p class="code">// hôm nay không có bug, chỉ có hoa</p>
     <p class="msg">🌷 Chúc các bạn nữ Ban Kỹ thuật luôn xinh đẹp, vui vẻ và gặp thật nhiều may mắn trong cuộc sống. Chúc các bạn luôn giữ được sự sáng tạo, nhiệt huyết và niềm đam mê của mình, dù là trong những chiếc poster hay trong hành trình phía trước.</p>
     <p class="msg">Mong rằng mọi nỗ lực của các bạn đều được đền đáp xứng đáng, deadline luôn nhẹ nhàng và mỗi ngày đi làm việc cùng nhau đều có thật nhiều niềm vui. Chúc các bạn luôn tự tin, hạnh phúc và tỏa sáng theo cách riêng của mình nhé! 💐❤️</p>
     <p class="from" id="from"></p>
@@ -37,16 +37,19 @@
   <div class="ground"></div>
   <p class="tip">Chạm vào màn hình để trồng thêm hoa</p>
 
-  <button class="music off" id="music" type="button" aria-label="Bật nhạc">
+  <div class="media-controls" aria-label="Điều khiển nhạc nền">
+  <button class="music off" id="music" type="button" aria-label="Bật nhạc nền">
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/>
       <path class="slash" d="M3 3l18 18"/>
     </svg>
   </button>
+  </div>
 </main>
 
-<!-- Trình phát YouTube chạy ngầm (chỉ phát tiếng) -->
+<!-- Trình phát nền. Trên điện thoại, nhạc chỉ có thể bắt đầu sau thao tác chạm của người dùng. -->
 <div class="yt-wrap" aria-hidden="true"><div id="yt"></div></div>
+
 
 <script src="script.js"></script>
 </body>

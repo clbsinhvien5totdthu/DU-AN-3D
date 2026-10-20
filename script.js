@@ -92,11 +92,20 @@
     window.onYouTubeIframeAPIReady = function () {
       player = new YT.Player('yt', {
         width: 200, height: 200, videoId: VIDEO_ID,
-        playerVars: { playsinline: 1, controls: 0, rel: 0, disablekb: 1, loop: 1, playlist: VIDEO_ID },
+        playerVars: { playsinline: 1, controls: 0, rel: 0, loop: 1, playlist: VIDEO_ID, origin: location.origin },
         events: {
           onReady: function () {
             playerReady = true;
-            if (wantPlay) player.playVideo();
+            // Nếu người dùng đã chạm để mở trang trong lúc API đang tải, thử phát ngay.
+            // Một số trình duyệt di động vẫn có thể yêu cầu chạm nút nhạc lần nữa.
+            if (wantPlay) {
+              try { player.mute(); player.playVideo(); } catch (err) {}
+              window.setTimeout(function () {
+                if (wantPlay && player && player.getPlayerState() !== 1) {
+                  try { player.unMute(); player.playVideo(); } catch (err) {}
+                }
+              }, 250);
+            }
           },
           onStateChange: function (e) {
             var playing = e.data === 1;
@@ -111,8 +120,16 @@
   }
 
   function toggleMusic() {
-    if (!playerReady) { wantPlay = true; return; }
-    if (player.getPlayerState() === 1) { player.pauseVideo(); } else { player.playVideo(); }
+    wantPlay = !(playerReady && player.getPlayerState() === 1);
+    if (!playerReady) {
+      // Nếu trình phát chưa sẵn sàng, giữ yêu cầu và thử lại khi API hoàn tất.
+      return;
+    }
+    if (wantPlay) {
+      try { player.unMute(); player.playVideo(); } catch (err) {}
+    } else {
+      player.pauseVideo();
+    }
   }
 
   function open() {

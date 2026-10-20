@@ -141,3 +141,9 @@ h1{
 .music:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .music .slash{display:none}
 .music.off .slash{display:block}
+
+/* ---- Điều khiển nhạc nền, tối ưu cho màn hình điện thoại ---- */
+.media-controls{position:absolute;z-index:8;right:.75rem;top:calc(env(safe-area-inset-top,0px) + .75rem);display:flex;align-items:center;gap:.55rem}
+.media-controls .music{position:static;opacity:1;visibility:visible;transition:none}
+.music:active{transform:scale(.97)}
+@media(max-width:480px){.media-controls{right:.65rem;top:calc(env(safe-area-inset-top,0px) + .65rem)}}
