@@ -1,0 +1,143 @@
+:root{
+  --sky-1:#2a1038; --sky-2:#5a1e63; --sky-3:#b53a7a; --sky-4:#ff9a7a;
+  --ink:#fff4e6; --gold:#ffd45e; --ground:#2a1a2e;
+  --hand:"Dancing Script","Segoe Script","Brush Script MT",cursive;
+  --body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:dark;
+  box-sizing:border-box;
+}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0;background:var(--sky-1)}
+body{
+  font-family:var(--body);color:var(--ink);overflow:hidden;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+}
+.stage{
+  position:fixed;inset:0;overflow:hidden;
+  background:
+    radial-gradient(1.5px 1.5px at 12% 14%,#fff9 50%,transparent 52%),
+    radial-gradient(1.5px 1.5px at 84% 9%,#fff9 50%,transparent 52%),
+    radial-gradient(1px 1px at 33% 27%,#fff8 50%,transparent 52%),
+    radial-gradient(1.5px 1.5px at 66% 22%,#fff9 50%,transparent 52%),
+    radial-gradient(1px 1px at 92% 34%,#fff8 50%,transparent 52%),
+    radial-gradient(1px 1px at 6% 38%,#fff8 50%,transparent 52%),
+    linear-gradient(180deg,var(--sky-1) 0%,var(--sky-2) 44%,var(--sky-3) 80%,var(--sky-4) 100%);
+}
+
+/* ---- Màn mở đầu: một bông hoa ---- */
+.intro{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1.6rem;padding:2rem;text-align:center;
+  transition:opacity .6s ease .15s;
+}
+.intro p{margin:0;font-size:1rem;line-height:1.6;color:#fff4e6cc}
+.intro .lead{font-family:var(--hand);font-size:clamp(1.9rem,8vw,2.6rem);font-weight:700;color:var(--ink);line-height:1.2}
+.seed{
+  all:unset;cursor:pointer;display:block;width:min(60vw,260px);aspect-ratio:1;
+  color:#ff5e8a;border-radius:50%;
+  filter:drop-shadow(0 10px 30px #ff5e8a66);
+  animation:bob 3.2s ease-in-out infinite;
+  transition:transform .8s cubic-bezier(.3,.9,.3,1),opacity .7s ease;
+}
+.seed svg{width:100%;height:100%;display:block}
+.seed:focus-visible{outline:3px solid var(--gold);outline-offset:8px}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.open .seed{animation:none;transform:scale(1.7) rotate(25deg);opacity:0;pointer-events:none}
+.open .intro{opacity:0;pointer-events:none}
+
+/* ---- Lời chúc ---- */
+.card{
+  position:absolute;left:0;right:0;top:0;z-index:3;
+  padding:calc(env(safe-area-inset-top,0px) + 4dvh) 1.5rem 0;
+  max-width:560px;margin:0 auto;text-align:center;
+  opacity:0;visibility:hidden;transform:translateY(14px);
+  transition:opacity 1.1s ease 1.6s,transform 1.1s ease 1.6s,visibility 0s 1.6s;
+}
+.open .card{opacity:1;visibility:visible;transform:none}
+.to{margin:0 0 .4rem;font-size:.95rem;color:#fff4e6cc}
+h1{
+  margin:0;font-family:var(--hand);font-weight:700;
+  font-size:clamp(2rem,9vw,2.9rem);line-height:1.12;
+  text-shadow:0 2px 18px #2a103899;
+}
+.date{
+  display:inline-block;margin:.4rem 0 .2rem;font-family:var(--hand);font-weight:700;
+  font-size:1.7rem;color:var(--gold);
+}
+.code{
+  margin:0 0 .8rem;font-family:var(--mono);font-size:.78rem;color:#ffd45ecc;
+  text-shadow:0 1px 8px #2a1038cc;
+}
+.msg{
+  margin:0 auto;max-width:40ch;font-size:.9rem;line-height:1.65;color:#fff4e6e6;
+  text-shadow:0 1px 10px #2a1038cc;
+}
+.msg + .msg{margin-top:.6rem}
+.from{margin:.8rem 0 0;font-family:var(--hand);font-size:1.45rem;font-weight:600;color:var(--gold)}
+
+/* ---- Vườn hoa ---- */
+.garden{position:absolute;inset:0;z-index:2;pointer-events:none}
+.f{
+  position:absolute;bottom:-2px;left:calc(var(--x) - var(--s)/2);
+  width:var(--s);height:var(--h);transform-origin:50% 100%;
+  filter:brightness(var(--dim,1));
+  animation:sway 4.2s ease-in-out var(--d) infinite alternate;
+}
+.st{
+  position:absolute;left:50%;bottom:0;width:3px;margin-left:-1.5px;height:100%;
+  background:linear-gradient(#6cc07a,#1f5a3d);border-radius:2px;
+  transform:scaleY(0);transform-origin:bottom;
+  animation:grow 1.1s cubic-bezier(.2,.7,.2,1) var(--d) forwards;
+}
+.b{
+  position:absolute;top:0;left:0;width:100%;color:var(--c);overflow:visible;
+  transform:translateY(-50%) scale(0) rotate(-40deg);
+  animation:bloom .9s cubic-bezier(.3,1.5,.5,1) calc(var(--d) + .95s) forwards;
+}
+@keyframes grow{to{transform:scaleY(1)}}
+@keyframes bloom{to{transform:translateY(-50%) scale(1) rotate(0)}}
+@keyframes sway{from{rotate:-2deg}to{rotate:2deg}}
+.ground{
+  position:absolute;left:0;right:0;bottom:0;height:calc(env(safe-area-inset-bottom,0px) + 8dvh);
+  z-index:4;pointer-events:none;
+  background:linear-gradient(transparent,var(--ground) 72%);
+}
+.tip{
+  position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 1.2dvh);z-index:5;
+  margin:0;text-align:center;font-size:.78rem;color:#fff4e6b3;
+  opacity:0;transition:opacity 1s ease 5s;pointer-events:none;
+}
+.open .tip{opacity:1}
+
+/* ---- Cánh hoa rơi ---- */
+.p{
+  position:absolute;top:-40px;z-index:1;color:var(--c);opacity:.85;pointer-events:none;
+  animation:fall var(--t) linear var(--d) infinite;
+}
+@keyframes fall{
+  0%{transform:translate3d(0,0,0) rotate(0)}
+  50%{transform:translate3d(28px,55dvh,0) rotate(180deg)}
+  100%{transform:translate3d(-16px,112dvh,0) rotate(360deg)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  .p{display:none}
+}
+
+/* ---- Nhạc nền ---- */
+.yt-wrap{position:fixed;left:-9999px;top:0;width:200px;height:200px;overflow:hidden;pointer-events:none}
+.music{
+  position:absolute;z-index:6;right:.75rem;top:calc(env(safe-area-inset-top,0px) + .75rem);
+  width:44px;height:44px;padding:0;border-radius:50%;
+  display:grid;place-items:center;cursor:pointer;
+  color:var(--ink);background:#2a103866;border:1px solid #fff4e64d;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  opacity:0;visibility:hidden;
+  transition:opacity .8s ease 1.6s,visibility 0s 1.6s;
+}
+.open .music{opacity:1;visibility:visible}
+.music:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.music .slash{display:none}
+.music.off .slash{display:block}
