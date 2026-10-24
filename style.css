@@ -1,0 +1,19 @@
+:root{--c:#e8b83a;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden;background:#1b2330;color:#fff8e8;font-family:"Be Vietnam Pro",system-ui,sans-serif}
+#stage{position:fixed;inset:0;transition:opacity .6s,transform .6s}#stage.out{opacity:0;transform:scale(1.04)}
+canvas{display:block}
+#badge{position:fixed;left:calc(16px + env(safe-area-inset-left,0px));top:calc(16px + env(safe-area-inset-top,0px));width:56px;height:56px;border-radius:50%;background:var(--c);color:#2a2112;font:800 28px/56px "Be Vietnam Pro",sans-serif;text-align:center;transition:background .6s}
+#ttl{position:fixed;left:88px;right:16px;top:calc(20px + env(safe-area-inset-top,0px));font:800 clamp(18px,3.4vw,38px)/1.15 "Be Vietnam Pro",sans-serif;text-shadow:0 2px 14px rgba(0,0,0,.6)}
+#shot{position:fixed;right:16px;top:calc(76px + env(safe-area-inset-top,0px));font-size:13px;padding:4px 10px;border-radius:99px;background:rgba(0,0,0,.4)}
+#ui{position:fixed;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 12px calc(12px + env(safe-area-inset-bottom,0px))}
+.glass{background:rgba(20,28,40,.5);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.18);border-radius:16px}
+#cap{max-width:860px;width:100%;padding:12px 20px;min-height:3.2em;font-size:clamp(14px,2vw,19px);line-height:1.5}
+#subs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}#subs button{padding:6px 12px;font-size:13px}
+button{font:600 14px "Be Vietnam Pro",sans-serif;color:inherit;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:8px 16px;cursor:pointer}
+button:hover{background:rgba(255,255,255,.22)}button:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+#subs button.on{background:var(--c);color:#2a2112;border-color:var(--c)}
+#bar{display:flex;align-items:center;gap:8px;padding:8px 12px;max-width:100%;flex-wrap:wrap;justify-content:center}
+#dots{display:flex;gap:6px}#dots button{width:13px;height:13px;padding:0;border-radius:50%}#dots button.on{background:var(--c);border-color:var(--c);transform:scale(1.35)}
+.off{opacity:0;pointer-events:none}.nocc #cap{display:none}
+#err{position:fixed;left:8px;top:120px;max-width:90%;color:#ffb4a8;font-size:12px}
